@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVENIX - Gaming Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .app-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .app-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .app-tagline {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .app-body {
+            padding: 20px;
+        }
+
+        .app-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .features {
+            margin-bottom: 15px;
+        }
+
+        .feature {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .feature:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        .app-footer {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-source {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+
+        .btn-source:hover {
+            background: #e0e0e0;
+            border-color: #667eea;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9em;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚡ RAVENIX</h1>
+            <p>Gaming Hub & Productivity Tools</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Applications</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Open</div>
+                <div class="stat-label">Source</div>
+            </div>
+        </div>
+
+        <!-- Apps Grid -->
+        <div class="apps-grid">
+            <!-- App 1: Game -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-icon">🎮</div>
+                    <div class="app-name">RAVENIX Game</div>
+                    <div class="app-tagline">Arcade Action</div>
+                </div>
+                <div class="app-body">
+                    <div class="app-description">
+                        Fast-paced arcade game where you fight enemies, dodge attacks, and rack up points!
+                    </div>
+                    <div class="features">
+                        <div class="feature">Real-time combat</div>
+                        <div class="feature">Enemy AI</div>
+                        <div class="feature">Level progression</div>
+                        <div class="feature">Mobile friendly</div>
+                        <div class="feature">Particle effects</div>
+                    </div>
+                    <div class="app-footer">
+                        <a href="index.html" class="btn btn-play">▶ Play Game</a>
+                        <a href="https://github.com/hamdan36ame-maker/ravenix-game" class="btn btn-source">📖 Source</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App 2: Todo List -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-icon">📝</div>
+                    <div class="app-name">Todo List</div>
+                    <div class="app-tagline">Productivity Tool</div>
+                </div>
+                <div class="app-body">
+                    <div class="app-description">
+                        Organize your tasks with priority levels, filtering, and automatic local storage!
+                    </div>
+                    <div class="features">
+                        <div class="feature">Add/delete tasks</div>
+                        <div class="feature">Priority levels</div>
+                        <div class="feature">Smart filters</div>
+                        <div class="feature">Local storage</div>
+                        <div class="feature">Live statistics</div>
+                    </div>
+                    <div class="app-footer">
+                        <a href="todo.html" class="btn btn-play">✓ Open Todo</a>
+                        <a href="https://github.com/hamdan36ame-maker/ravenix-game" class="btn btn-source">📖 Source</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🚀 Built with HTML5, CSS3 & Vanilla JavaScript</p>
+            <p style="margin-top: 10px; opacity: 0.8;">© 2026 RAVENIX | All tasks are saved locally on your device</p>
+        </div>
+    </div>
+</body>
+</html>
