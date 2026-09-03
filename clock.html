@@ -76,12 +76,26 @@
             box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
         }
 
+        .clock-card.india {
+            border-color: #ff9933;
+            box-shadow: 0 0 30px rgba(255, 153, 51, 0.3);
+        }
+
+        .clock-card.india:hover {
+            border-color: #ffffff;
+            box-shadow: 0 0 50px rgba(255, 153, 51, 0.6);
+        }
+
         .city-name {
             font-size: 18px;
             font-weight: bold;
             color: #00d9ff;
             margin-bottom: 8px;
             letter-spacing: 1px;
+        }
+
+        .clock-card.india .city-name {
+            color: #ff9933;
         }
 
         .timezone {
@@ -290,6 +304,11 @@
             background: #0f3460;
             color: #fff;
         }
+
+        .india-flag {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -363,6 +382,10 @@ const TIMEZONES = [
     { city: 'Bangkok', offset: 7, timezone: 'Asia/Bangkok' },
     { city: 'Hong Kong', offset: 8, timezone: 'Asia/Hong_Kong' },
     { city: 'Mumbai', offset: 5.5, timezone: 'Asia/Kolkata' },
+    { city: 'Delhi', offset: 5.5, timezone: 'Asia/Kolkata' },
+    { city: 'Bangalore', offset: 5.5, timezone: 'Asia/Kolkata' },
+    { city: 'Kolkata', offset: 5.5, timezone: 'Asia/Kolkata' },
+    { city: 'Chennai', offset: 5.5, timezone: 'Asia/Kolkata' },
     { city: 'Moscow', offset: 3, timezone: 'Europe/Moscow' },
     { city: 'Paris', offset: 1, timezone: 'Europe/Paris' },
     { city: 'Berlin', offset: 1, timezone: 'Europe/Berlin' },
@@ -376,8 +399,7 @@ const TIMEZONES = [
     { city: 'Auckland', offset: 12, timezone: 'Pacific/Auckland' },
     { city: 'Fiji', offset: 12, timezone: 'Pacific/Fiji' },
     { city: 'Honolulu', offset: -10, timezone: 'Pacific/Honolulu' },
-    { city: 'Anchorage', offset: -9, timezone: 'America/Anchorage' },
-    { city: 'Bangkok', offset: 7, timezone: 'Asia/Bangkok' }
+    { city: 'Anchorage', offset: -9, timezone: 'America/Anchorage' }
 ];
 
 let clocks = [];
@@ -407,11 +429,12 @@ function loadClocks() {
     }
 }
 
-// Get default clocks
+// Get default clocks (with Indian Time)
 function getDefaultClocks() {
     return [
         { city: 'London', timezone: 'Europe/London' },
         { city: 'New York', timezone: 'America/New_York' },
+        { city: 'Mumbai', timezone: 'Asia/Kolkata' },
         { city: 'Tokyo', timezone: 'Asia/Tokyo' },
         { city: 'Sydney', timezone: 'Australia/Sydney' }
     ];
@@ -420,6 +443,11 @@ function getDefaultClocks() {
 // Save clocks to localStorage
 function saveClocks() {
     localStorage.setItem('clocks', JSON.stringify(clocks));
+}
+
+// Check if city is in India
+function isIndianCity(timezone) {
+    return timezone === 'Asia/Kolkata';
 }
 
 // Update all clocks
@@ -458,9 +486,11 @@ function updateClocks() {
         const hour12 = parseInt(hours) % 12 || 12;
         const amPm = parseInt(hours) >= 12 ? 'PM' : 'AM';
 
+        const isIndia = isIndianCity(clock.timezone);
         const card = document.createElement('div');
-        card.className = 'clock-card';
+        card.className = `clock-card ${isIndia ? 'india' : ''}`;
         card.innerHTML = `
+            ${isIndia ? '<div class="india-flag">🇮🇳</div>' : ''}
             <div class="city-name">${clock.city}</div>
             <div class="timezone">${clock.timezone}</div>
             <div class="time-display">${String(hour12).padStart(2, '0')}:${minutes}:${seconds}</div>
