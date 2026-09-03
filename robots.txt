@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Sitemap: https://hamdan36ame-maker.github.io/ravenix-game/sitemap.xml
+
+# Allow all crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Prevent crawling of certain folders
+Disallow: /admin/
+Disallow: /.git/

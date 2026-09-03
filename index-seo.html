@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RAVENIX - Play a fast-paced arcade game online. Fight enemies, dodge attacks, and score points. Free to play, mobile-friendly, and no installation required!">
+    <meta name="keywords" content="arcade game, online game, free game, RAVENIX, action game, browser game, play game">
+    <meta name="author" content="Hamdan Khan">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hamdan36ame-maker.github.io/ravenix-game/">
+    <meta property="og:title" content="RAVENIX - Free Arcade Game | Play Online">
+    <meta property="og:description" content="Experience fast-paced arcade action! Fight enemies, dodge attacks, and reach the highest score in RAVENIX. No download needed - play now!">
+    <meta property="og:image" content="https://hamdan36ame-maker.github.io/ravenix-game/og-image.png">
+    <meta property="og:site_name" content="RAVENIX Gaming">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://hamdan36ame-maker.github.io/ravenix-game/">
+    <meta property="twitter:title" content="RAVENIX - Free Arcade Game">
+    <meta property="twitter:description" content="Play RAVENIX - A fast-paced arcade game with enemies, attacks, and high scores!">
+    <meta property="twitter:image" content="https://hamdan36ame-maker.github.io/ravenix-game/og-image.png">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://hamdan36ame-maker.github.io/ravenix-game/">
+    <link rel="alternate" hreflang="en" href="https://hamdan36ame-maker.github.io/ravenix-game/">
+    
+    <title>RAVENIX - Free Arcade Game | Play Online Now</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #02030a;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        #game {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 45%, #172c68 0%, transparent 30%),
+                radial-gradient(circle at 10% 90%, #24104d 0%, transparent 30%),
+                linear-gradient(135deg, #02030a, #07152d, #10051d);
+        }
+
+        /* STARS */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: .7;
+            animation: starMove linear infinite;
+        }
+
+        @keyframes starMove {
+            from { transform: translateY(0) }
+            to { transform: translateY(100vh) }
+        }
+
+        /* HOME */
+        #home {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .homeBox {
+            width: min(900px, 94vw);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(130, 150, 255, .25);
+            border-radius: 30px;
+            background: rgba(5, 9, 25, .72);
+            backdrop-filter: blur(18px);
+            box-shadow:
+                0 0 80px rgba(72, 89, 255, .16),
+                inset 0 0 40px rgba(100, 120, 255, .04);
+        }
+
+        .smallTitle {
+            color: #8294ff;
+            letter-spacing: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .logo {
+            margin-top: 10px;
+            font-size: clamp(48px, 10vw, 90px);
+            font-weight: 1000;
+            letter-spacing: -4px;
+            background: linear-gradient(90deg, #fff, #8797ff, #d36cff);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(110, 120, 255, .4);
+        }
+
+        .tagline {
+            color: #9da8c5;
+            margin: 12px auto 25px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .startBtn {
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            padding: 17px 40px;
+            border-radius: 16px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #536dff, #a33cff);
+            box-shadow:
+                0 0 20px rgba(91, 93, 255, .45),
+                0 10px 35px rgba(91, 93, 255, .25);
+            transition: .15s;
+        }
+
+        .startBtn:active {
+            transform: scale(.94);
+        }
+
+        .infoRow {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .info {
+            padding: 9px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: #aeb8d4;
+            font-size: 11px;
+        }
+
+        /* GAME */
+        #gameScreen {
+            position: absolute;
+            inset: 0;
+            display: none;
+        }
+
+        #gameScreen.active {
+            display: block;
+        }
+
+        /* HUD */
+        #hud {
+            position: absolute;
+            z-index: 5;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 16px;
+            background: rgba(3, 6, 17, .72);
+            backdrop-filter: blur(12px);
+        }
+
+        .stat {
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .stat small {
+            display: block;
+            color: #7886aa;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+        .stat b {
+            font-size: 18px;
+        }
+
+        #health {
+            color: #ff6688;
+        }
+
+        #score {
+            color: #80a0ff;
+        }
+
+        /* CANVAS */
+        canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* EXIT */
+        .exitBtn {
+            position: absolute;
+            z-index: 8;
+            top: 22px;
+            right: 22px;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, .07);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* CONTROLS */
+        .controls {
+            position: absolute;
+            z-index: 10;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 170px;
+        }
+
+        .control {
+            position: absolute;
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            border: 1px solid rgba(145, 160, 255, .35);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            background:
+                linear-gradient(145deg,
+                rgba(96, 111, 255, .35),
+                rgba(145, 55, 255, .25));
+            box-shadow:
+                0 5px 20px rgba(65, 70, 255, .25),
+                inset 0 0 15px rgba(255, 255, 255, .05);
+            cursor: pointer;
+        }
+
+        .control:active {
+            transform: scale(.88);
+            box-shadow:
+                0 0 30px rgba(100, 120, 255, .65),
+                inset 0 0 20px rgba(255, 255, 255, .12);
+        }
+
+        .up { left: 101px; top: 0; }
+        .left { left: 35px; top: 62px; }
+        .attack {
+            left: 101px;
+            top: 62px;
+            background: linear-gradient(145deg, #ff315f, #ff7b2f);
+            box-shadow: 0 0 25px rgba(255, 65, 75, .5);
+        }
+        .right { right: 35px; top: 62px; }
+        .down { left: 101px; top: 124px; }
+
+        /* GAME OVER */
+        #gameOver {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(1, 2, 8, .78);
+            backdrop-filter: blur(8px);
+        }
+
+        .overBox {
+            width: min(400px, 88vw);
+            padding: 35px;
+            text-align: center;
+            border-radius: 25px;
+            background: rgba(10, 14, 35, .95);
+            border: 1px solid rgba(130, 145, 255, .25);
+            box-shadow: 0 0 70px rgba(74, 82, 255, .2);
+        }
+
+        .overBox h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .finalScore {
+            color: #8495ff;
+            margin-bottom: 25px;
+        }
+
+        .restart {
+            border: none;
+            padding: 14px 28px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #566dff, #a13dff);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* MOBILE */
+        @media(max-width: 600px) {
+            .homeBox { padding: 30px 20px; }
+            .logo { font-size: 58px; }
+            .tagline { font-size: 13px; }
+            .controls { bottom: 10px; }
+            #hud { top: 8px; height: 55px; }
+            .exitBtn { top: 15px; right: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <!-- BACKGROUND STARS -->
+        <div id="stars"></div>
+
+        <!-- HOME -->
+        <section id="home">
+            <div class="homeBox">
+                <div class="smallTitle">MHP GAMING DIVISION</div>
+                <div class="logo">RAVENIX</div>
+                <p class="tagline">
+                    Enter the dark arena. Move fast, attack enemies
+                    and become the ultimate RAVENIX champion.
+                </p>
+                <button class="startBtn" onclick="startGame()">
+                    ⚡ START GAME
+                </button>
+                <div class="infoRow">
+                    <div class="info">🎮 FAST ACTION</div>
+                    <div class="info">👾 ENEMIES</div>
+                    <div class="info">💥 ATTACK</div>
+                    <div class="info">🏆 SCORE</div>
+                    <div class="info">📱 MOBILE</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAME SCREEN -->
+        <section id="gameScreen">
+            <canvas id="canvas"></canvas>
+
+            <div id="hud">
+                <div class="stat">
+                    <small>SCORE</small>
+                    <b id="score">0</b>
+                </div>
+                <div class="stat">
+                    <small>LEVEL</small>
+                    <b id="level">1</b>
+                </div>
+                <div class="stat">
+                    <small>HEALTH</small>
+                    <b id="health">100</b>
+                </div>
+                <div class="stat">
+                    <small>TIME</small>
+                    <b id="time">60</b>
+                </div>
+            </div>
+
+            <button class="exitBtn" onclick="exitGame()">✕</button>
+
+            <!-- CONTROLS -->
+            <div class="controls">
+                <button class="control up"
+                        ontouchstart="moveUp=true"
+                        ontouchend="moveUp=false"
+                        onmousedown="moveUp=true"
+                        onmouseup="moveUp=false">▲</button>
+                <button class="control left"
+                        ontouchstart="moveLeft=true"
+                        ontouchend="moveLeft=false"
+                        onmousedown="moveLeft=true"
+                        onmouseup="moveLeft=false">◀</button>
+                <button class="control attack"
+                        ontouchstart="attack()"
+                        onclick="attack()">⚡</button>
+                <button class="control right"
+                        ontouchstart="moveRight=true"
+                        ontouchend="moveRight=false"
+                        onmousedown="moveRight=true"
+                        onmouseup="moveRight=false">▶</button>
+                <button class="control down"
+                        ontouchstart="moveDown=true"
+                        ontouchend="moveDown=false"
+                        onmousedown="moveDown=true"
+                        onmouseup="moveDown=false">▼</button>
+            </div>
+        </section>
+
+        <!-- GAME OVER -->
+        <section id="gameOver">
+            <div class="overBox">
+                <h2>GAME OVER</h2>
+                <div class="finalScore">
+                    FINAL SCORE:
+                    <b id="finalScore">0</b>
+                </div>
+                <button class="restart" onclick="restartGame()">
+                    🔄 PLAY AGAIN
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Background Stars
+        const stars = document.getElementById("stars");
+        for (let i = 0; i < 90; i++) {
+            const s = document.createElement("div");
+            s.className = "star";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 100 + "%";
+            s.style.animationDuration = (5 + Math.random() * 10) + "s";
+            s.style.opacity = Math.random();
+            stars.appendChild(s);
+        }
+
+        // Canvas Setup
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        let W, H;
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        // Game Variables
+        let running = false;
+        let score = 0, level = 1, health = 100, time = 60;
+        let moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
+        let player = { x: 0, y: 0, size: 25, speed: 6 };
+        let enemies = [], particles = [];
+        let lastTime = 0, timerInterval;
+
+        // Start Game
+        function startGame() {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("gameScreen").classList.add("active");
+            document.getElementById("gameOver").style.display = "none";
+
+            score = 0; level = 1; health = 100; time = 60;
+            player.x = W / 2; player.y = H / 2;
+            enemies = []; particles = [];
+
+            spawnEnemy(); spawnEnemy();
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (!running) return;
+                time--;
+                updateHUD();
+                if (time <= 0) endGame();
+            }, 1000);
+
+            running = true;
+            lastTime = performance.now();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function gameLoop(now) {
+            if (!running) return;
+            const dt = Math.min((now - lastTime) / 16.67, 2);
+            lastTime = now;
+            update(dt);
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function update(dt) {
+            let speed = player.speed;
+            if (moveUp) player.y -= speed * dt;
+            if (moveDown) player.y += speed * dt;
+            if (moveLeft) player.x -= speed * dt;
+            if (moveRight) player.x += speed * dt;
+            if (keys["ArrowUp"] || keys["w"]) player.y -= speed * dt;
+            if (keys["ArrowDown"] || keys["s"]) player.y += speed * dt;
+            if (keys["ArrowLeft"] || keys["a"]) player.x -= speed * dt;
+            if (keys["ArrowRight"] || keys["d"]) player.x += speed * dt;
+
+            player.x = Math.max(30, Math.min(W - 30, player.x));
+            player.y = Math.max(90, Math.min(H - 90, player.y));
+
+            enemies.forEach(enemy => {
+                let dx = player.x - enemy.x, dy = player.y - enemy.y;
+                let distance = Math.hypot(dx, dy);
+                if (distance > 1) {
+                    enemy.x += (dx / distance) * enemy.speed * dt;
+                    enemy.y += (dy / distance) * enemy.speed * dt;
+                }
+                if (distance < 42) {
+                    health -= 0.5 * dt;
+                    if (health <= 0) { health = 0; endGame(); }
+                }
+            });
+
+            particles.forEach(p => {
+                p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt;
+            });
+            particles = particles.filter(p => p.life > 0);
+            if (particles.length > 300) particles.splice(0, particles.length - 300);
+
+            level = Math.floor(score / 500) + 1;
+            if (enemies.length < Math.min(2 + level, 8)) {
+                if (Math.random() < 0.025 * dt) spawnEnemy();
+            }
+            updateHUD();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = "rgba(3,7,20,.20)";
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.strokeStyle = "rgba(100,120,255,.06)";
+            ctx.lineWidth = 1;
+            const grid = 55;
+            for (let x = 0; x < W; x += grid) {
+                ctx.beginPath(); ctx.moveTo(x, 70); ctx.lineTo(x, H); ctx.stroke();
+            }
+            for (let y = 70; y < H; y += grid) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            }
+
+            particles.forEach(p => {
+                ctx.globalAlpha = Math.max(0, p.life / 30);
+                ctx.fillStyle = p.color;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+
+            enemies.forEach(enemy => {
+                const glow = ctx.createRadialGradient(enemy.x, enemy.y, 2, enemy.x, enemy.y, 40);
+                glow.addColorStop(0, "rgba(255,50,90,.7)"); glow.addColorStop(1, "rgba(255,50,90,0)");
+                ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(enemy.x, enemy.y, 40, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#ff416c"; ctx.beginPath(); ctx.arc(enemy.x, enemy.y, 18, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(enemy.x - 6, enemy.y - 3, 3, 0, Math.PI * 2);
+                ctx.arc(enemy.x + 6, enemy.y - 3, 3, 0, Math.PI * 2); ctx.fill();
+            });
+
+            const pg = ctx.createRadialGradient(player.x, player.y, 3, player.x, player.y, 55);
+            pg.addColorStop(0, "rgba(90,130,255,.8)"); pg.addColorStop(1, "rgba(90,130,255,0)");
+            ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(player.x, player.y, 55, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = "#728cff"; ctx.beginPath(); ctx.arc(player.x, player.y, 23, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = "#c9d2ff"; ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(player.x, player.y, 7, 0, Math.PI * 2); ctx.fill();
+        }
+
+        function spawnEnemy() {
+            let side = Math.floor(Math.random() * 4);
+            let x, y;
+            if (side === 0) { x = 30; y = 100 + Math.random() * (H - 180); }
+            if (side === 1) { x = W - 30; y = 100 + Math.random() * (H - 180); }
+            if (side === 2) { x = Math.random() * W; y = 100; }
+            if (side === 3) { x = Math.random() * W; y = H - 90; }
+            enemies.push({ x, y, speed: 1.0 + level * 0.15 });
+        }
+
+        function attack() {
+            if (!running) return;
+            let hit = false;
+            const newEnemies = [];
+            enemies.forEach(enemy => {
+                const d = Math.hypot(enemy.x - player.x, enemy.y - player.y);
+                if (d < 130) {
+                    hit = true; score += 100; explosion(enemy.x, enemy.y);
+                } else {
+                    newEnemies.push(enemy);
+                }
+            });
+            enemies = newEnemies;
+            if (hit) {
+                for (let i = 0; i < 12; i++) {
+                    particles.push({
+                        x: player.x, y: player.y,
+                        vx: (Math.random() - .5) * 10, vy: (Math.random() - .5) * 10,
+                        size: Math.random() * 4 + 2, life: 25, color: "#8da0ff"
+                    });
+                }
+            }
+            updateHUD();
+        }
+
+        function explosion(x, y) {
+            for (let i = 0; i < 22; i++) {
+                particles.push({
+                    x, y,
+                    vx: (Math.random() - .5) * 9, vy: (Math.random() - .5) * 9,
+                    size: Math.random() * 5 + 1, life: 35, color: "#ff5577"
+                });
+            }
+        }
+
+        function updateHUD() {
+            document.getElementById("score").textContent = score;
+            document.getElementById("level").textContent = level;
+            document.getElementById("health").textContent = Math.ceil(health);
+            document.getElementById("time").textContent = time;
+        }
+
+        function endGame() {
+            if (!running) return;
+            running = false;
+            clearInterval(timerInterval);
+            document.getElementById("finalScore").textContent = score;
+            document.getElementById("gameOver").style.display = "flex";
+        }
+
+        function restartGame() { startGame(); }
+        function exitGame() {
+            running = false; clearInterval(timerInterval);
+            document.getElementById("gameScreen").classList.remove("active");
+            document.getElementById("gameOver").style.display = "none";
+            document.getElementById("home").style.display = "flex";
+        }
+
+        const keys = {};
+        document.addEventListener("keydown", e => {
+            keys[e.key] = true;
+            if (e.code === "Space") { e.preventDefault(); attack(); }
+        });
+        document.addEventListener("keyup", e => { keys[e.key] = false; });
+        document.addEventListener("touchend", () => {
+            moveUp = moveDown = moveLeft = moveRight = false;
+        });
+    </script>
+</body>
+</html>
