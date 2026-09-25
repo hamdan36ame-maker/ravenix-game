@@ -238,105 +238,15 @@
             cursor: pointer;
         }
 
-        /* CONTROLS */
-        .controls {
-            position: absolute;
-            z-index: 10;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            height: 170px;
-        }
-
-        .control {
-            position: absolute;
-            width: 58px;
-            height: 58px;
-            border-radius: 18px;
-            border: 1px solid rgba(145, 160, 255, .35);
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
-            background:
-                linear-gradient(145deg,
-                rgba(96, 111, 255, .35),
-                rgba(145, 55, 255, .25));
-            box-shadow:
-                0 5px 20px rgba(65, 70, 255, .25),
-                inset 0 0 15px rgba(255, 255, 255, .05);
-            cursor: pointer;
-        }
-
-        .control:active {
-            transform: scale(.88);
-            box-shadow:
-                0 0 30px rgba(100, 120, 255, .65),
-                inset 0 0 20px rgba(255, 255, 255, .12);
-        }
-
-        .up { left: 101px; top: 0; }
-        .left { left: 35px; top: 62px; }
-        .attack {
-            left: 101px;
-            top: 62px;
-            background: linear-gradient(145deg, #ff315f, #ff7b2f);
-            box-shadow: 0 0 25px rgba(255, 65, 75, .5);
-        }
-        .right { right: 35px; top: 62px; }
-        .down { left: 101px; top: 124px; }
-
-        /* GAME OVER */
-        #gameOver {
-            position: absolute;
-            inset: 0;
-            z-index: 20;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            background: rgba(1, 2, 8, .78);
-            backdrop-filter: blur(8px);
-        }
-
-        .overBox {
-            width: min(400px, 88vw);
-            padding: 35px;
-            text-align: center;
-            border-radius: 25px;
-            background: rgba(10, 14, 35, .95);
-            border: 1px solid rgba(130, 145, 255, .25);
-            box-shadow: 0 0 70px rgba(74, 82, 255, .2);
-        }
-
-        .overBox h2 {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .finalScore {
-            color: #8495ff;
-            margin-bottom: 25px;
-        }
-
-        .restart {
-            border: none;
-            padding: 14px 28px;
-            border-radius: 13px;
-            background: linear-gradient(135deg, #566dff, #a13dff);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* MOBILE */
-        @media(max-width: 600px) {
-            .homeBox { padding: 30px 20px; }
-            .logo { font-size: 58px; }
-            .tagline { font-size: 13px; }
-            .controls { bottom: 10px; }
-            #hud { top: 8px; height: 55px; }
-            .exitBtn { top: 15px; right: 15px; }
-        }
+        /* FUTURISTIC MOBILE CONTROLS */
+        .controls{position:absolute;z-index:10;left:18px;right:18px;bottom:18px;height:190px;pointer-events:none}
+        .joystick{position:absolute;left:0;bottom:0;width:176px;height:176px;border-radius:50%;touch-action:none;pointer-events:auto;user-select:none;background:radial-gradient(circle,rgba(24,43,94,.94) 0 42%,rgba(12,24,61,.88) 43% 68%,rgba(8,18,48,.58) 69%);border:3px solid rgba(45,164,255,.8);box-shadow:0 0 0 8px rgba(31,110,220,.16),0 0 35px rgba(0,166,255,.32),inset 0 0 28px rgba(64,137,255,.28)}
+        .joystick::before{content:"";position:absolute;inset:14px;border:1px solid rgba(90,191,255,.42);border-radius:50%}.joystick::after{content:"";position:absolute;inset:46px;border:1px solid rgba(90,191,255,.2);border-radius:50%}
+        .joyArrow{position:absolute;color:#7cc8ff;font-size:25px;font-weight:900;text-shadow:0 0 10px #169eff;pointer-events:none}.joyUp{top:17px;left:75px}.joyDown{bottom:17px;left:75px}.joyLeft{left:18px;top:73px}.joyRight{right:18px;top:73px}
+        .joystickKnob{position:absolute;width:78px;height:78px;left:49px;top:49px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#dff8ff,#56c9ff 38%,#1688ed 72%,#0b4db2);border:3px solid rgba(225,249,255,.85);box-shadow:0 0 22px rgba(37,190,255,.85),inset 0 0 16px rgba(255,255,255,.35);transform:translate3d(0,0,0);transition:transform .10s ease-out;pointer-events:none}.joystickKnob::after{content:"";position:absolute;inset:22px;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35)}
+        .attack{position:absolute;right:18px;bottom:8px;width:102px;height:102px;border-radius:50%;border:3px solid #ffb13b;color:white;font-size:38px;font-weight:bold;cursor:pointer;touch-action:none;pointer-events:auto;background:radial-gradient(circle,#21386f 0 46%,#101d4a 47% 72%,#0b1430 73%);box-shadow:0 0 0 7px rgba(255,139,0,.12),0 0 30px rgba(255,143,0,.55),inset 0 0 24px rgba(255,158,30,.25)}.attack::after{content:"FIRE";position:absolute;left:0;right:0;bottom:12px;font-size:10px;letter-spacing:2px;color:#ffd98b}.attack:active{transform:scale(.93);box-shadow:0 0 0 7px rgba(255,139,0,.18),0 0 45px rgba(255,143,0,.8),inset 0 0 28px rgba(255,158,30,.35)}
+        .weaponBtn{position:absolute;right:132px;bottom:25px;width:74px;height:74px;border-radius:50%;border:2px solid #56c9ff;color:#e9f8ff;font-size:27px;font-weight:bold;cursor:pointer;touch-action:none;pointer-events:auto;background:radial-gradient(circle,#173e72 0 42%,#0d214a 43% 72%,#07132f 73%);box-shadow:0 0 0 5px rgba(55,190,255,.10),0 0 24px rgba(0,190,255,.42),inset 0 0 18px rgba(80,200,255,.18)}.weaponBtn:active{transform:scale(.92)}.weaponLabel{position:absolute;left:0;right:0;bottom:-17px;text-align:center;font-size:9px;letter-spacing:1.4px;color:#9ee8ff;pointer-events:none}.weaponName{position:absolute;right:132px;bottom:106px;min-width:74px;text-align:center;padding:5px 8px;border-radius:10px;background:rgba(5,16,42,.78);border:1px solid rgba(86,201,255,.35);color:#dff8ff;font-size:10px;letter-spacing:1px;pointer-events:none}        
+        @media(max-width:600px){.controls{left:10px;right:10px;bottom:10px;height:170px}.joystick{width:154px;height:154px}.joystickKnob{width:68px;height:68px;left:43px;top:43px}.joyUp,.joyDown{left:65px}.joyLeft{left:15px;top:63px}.joyRight{right:15px}.attack{width:86px;height:86px;right:8px;bottom:4px;font-size:31px}.weaponBtn{width:62px;height:62px;right:102px;bottom:12px;font-size:23px}.weaponName{right:98px;bottom:84px;font-size:9px;min-width:62px}}
     </style>
 </head>
 <body>
@@ -391,31 +301,17 @@
 
             <button class="exitBtn" onclick="exitGame()">✕</button>
 
-            <!-- CONTROLS -->
+            <!-- SMOOTH ANALOG CONTROLS -->
             <div class="controls">
-                <button class="control up"
-                        ontouchstart="moveUp=true"
-                        ontouchend="moveUp=false"
-                        onmousedown="moveUp=true"
-                        onmouseup="moveUp=false">▲</button>
-                <button class="control left"
-                        ontouchstart="moveLeft=true"
-                        ontouchend="moveLeft=false"
-                        onmousedown="moveLeft=true"
-                        onmouseup="moveLeft=false">◀</button>
-                <button class="control attack"
-                        ontouchstart="attack()"
-                        onclick="attack()">⚡</button>
-                <button class="control right"
-                        ontouchstart="moveRight=true"
-                        ontouchend="moveRight=false"
-                        onmousedown="moveRight=true"
-                        onmouseup="moveRight=false">▶</button>
-                <button class="control down"
-                        ontouchstart="moveDown=true"
-                        ontouchend="moveDown=false"
-                        onmousedown="moveDown=true"
-                        onmouseup="moveDown=false">▼</button>
+                <div class="joystick" id="joystick" aria-label="Movement joystick">
+                    <span class="joyArrow joyUp">▲</span><span class="joyArrow joyDown">▼</span>
+                    <span class="joyArrow joyLeft">◀</span><span class="joyArrow joyRight">▶</span>
+                    <div class="joystickKnob" id="joystickKnob"></div>
+                </div>
+                <button class="weaponBtn" id="weaponButton" aria-label="Change weapon">⚙️</button>
+                <div class="weaponName" id="weaponName">LASER</div>
+                <div class="weaponLabel">WEAPON</div>
+                <button class="attack" id="attackButton" aria-label="Fire">🚀</button>
             </div>
         </section>
 
@@ -462,7 +358,13 @@
         // Game Variables
         let running = false;
         let score = 0, level = 1, health = 100, time = 60;
-        let moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
+        let joystickX = 0, joystickY = 0;
+        const weapons = [
+            { name: "LASER", icon: "⚡", range: 130, score: 100, color: "#66d9ff" },
+            { name: "PLASMA", icon: "✦", range: 180, score: 125, color: "#b38cff" },
+            { name: "MISSILE", icon: "🚀", range: 230, score: 150, color: "#ffb13b" }
+        ];
+        let weaponIndex = 0;
         let player = { x: 0, y: 0, size: 25, speed: 6 };
         let enemies = [], particles = [];
         let lastTime = 0, timerInterval;
@@ -503,10 +405,10 @@
 
         function update(dt) {
             let speed = player.speed;
-            if (moveUp) player.y -= speed * dt;
-            if (moveDown) player.y += speed * dt;
-            if (moveLeft) player.x -= speed * dt;
-            if (moveRight) player.x += speed * dt;
+            // Smooth analog movement: direction and speed are proportional
+            // to how far the joystick is pushed.
+            player.x += joystickX * speed * dt;
+            player.y += joystickY * speed * dt;
             if (keys["ArrowUp"] || keys["w"]) player.y -= speed * dt;
             if (keys["ArrowDown"] || keys["s"]) player.y += speed * dt;
             if (keys["ArrowLeft"] || keys["a"]) player.x -= speed * dt;
@@ -564,12 +466,19 @@
             ctx.globalAlpha = 1;
 
             enemies.forEach(enemy => {
-                const glow = ctx.createRadialGradient(enemy.x, enemy.y, 2, enemy.x, enemy.y, 40);
-                glow.addColorStop(0, "rgba(255,50,90,.7)"); glow.addColorStop(1, "rgba(255,50,90,0)");
-                ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(enemy.x, enemy.y, 40, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = "#ff416c"; ctx.beginPath(); ctx.arc(enemy.x, enemy.y, 18, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(enemy.x - 6, enemy.y - 3, 3, 0, Math.PI * 2);
-                ctx.arc(enemy.x + 6, enemy.y - 3, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.save();
+                const glow = ctx.createRadialGradient(enemy.x, enemy.y, 3, enemy.x, enemy.y, 48);
+                glow.addColorStop(0, "rgba(255,55,150,.65)"); glow.addColorStop(1, "rgba(255,30,120,0)");
+                ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(enemy.x, enemy.y, 48, 0, Math.PI * 2); ctx.fill();
+                ctx.translate(enemy.x, enemy.y); ctx.rotate(performance.now()/1200);
+                const pulse = 18 + Math.sin(performance.now()/180 + enemy.x)*2;
+                ctx.beginPath();
+                for(let i=0;i<16;i++){const a=i*Math.PI/8,r=i%2===0?pulse+8:pulse-3,x=Math.cos(a)*r,y=Math.sin(a)*r;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+                ctx.closePath(); ctx.fillStyle="#ff2f88"; ctx.shadowBlur=18; ctx.shadowColor="#ff2f88"; ctx.fill();
+                ctx.shadowBlur=0; ctx.beginPath(); ctx.arc(0,0,12,0,Math.PI*2);
+                const core=ctx.createRadialGradient(-3,-3,1,0,0,13); core.addColorStop(0,"#ffffff"); core.addColorStop(.35,"#ffb9e0"); core.addColorStop(1,"#a6005e");
+                ctx.fillStyle=core; ctx.fill(); ctx.strokeStyle="#ffd1ed"; ctx.lineWidth=2; ctx.stroke();
+                ctx.restore();
             });
 
             const pg = ctx.createRadialGradient(player.x, player.y, 3, player.x, player.y, 55);
@@ -592,35 +501,60 @@
 
         function attack() {
             if (!running) return;
+
+            const weapon = weapons[weaponIndex];
             let hit = false;
             const newEnemies = [];
+
             enemies.forEach(enemy => {
                 const d = Math.hypot(enemy.x - player.x, enemy.y - player.y);
-                if (d < 130) {
-                    hit = true; score += 100; explosion(enemy.x, enemy.y);
+                if (d < weapon.range) {
+                    hit = true;
+                    score += weapon.score;
+                    explosion(enemy.x, enemy.y, weapon.color);
                 } else {
                     newEnemies.push(enemy);
                 }
             });
+
             enemies = newEnemies;
-            if (hit) {
-                for (let i = 0; i < 12; i++) {
-                    particles.push({
-                        x: player.x, y: player.y,
-                        vx: (Math.random() - .5) * 10, vy: (Math.random() - .5) * 10,
-                        size: Math.random() * 4 + 2, life: 25, color: "#8da0ff"
-                    });
-                }
+
+            // Weapon-specific firing particles.
+            const burst = weaponIndex === 2 ? 20 : weaponIndex === 1 ? 16 : 12;
+            for (let i = 0; i < burst; i++) {
+                particles.push({
+                    x: player.x, y: player.y,
+                    vx: (Math.random() - .5) * (weaponIndex === 2 ? 15 : 10),
+                    vy: (Math.random() - .5) * (weaponIndex === 2 ? 15 : 10),
+                    size: Math.random() * 4 + 2,
+                    life: 25,
+                    color: weapon.color
+                });
             }
+
             updateHUD();
         }
 
-        function explosion(x, y) {
+        function cycleWeapon() {
+            weaponIndex = (weaponIndex + 1) % weapons.length;
+            const weapon = weapons[weaponIndex];
+            const button = document.getElementById("weaponButton");
+            const name = document.getElementById("weaponName");
+
+            button.textContent = weapon.icon;
+            name.textContent = weapon.name;
+            name.style.color = weapon.color;
+            button.style.borderColor = weapon.color;
+            button.style.boxShadow =
+                `0 0 0 5px rgba(55,190,255,.10), 0 0 28px ${weapon.color}, inset 0 0 18px rgba(80,200,255,.18)`;
+        }
+
+        function explosion(x, y, color = "#ff5577") {
             for (let i = 0; i < 22; i++) {
                 particles.push({
                     x, y,
                     vx: (Math.random() - .5) * 9, vy: (Math.random() - .5) * 9,
-                    size: Math.random() * 5 + 1, life: 35, color: "#ff5577"
+                    size: Math.random() * 5 + 1, life: 35, color
                 });
             }
         }
@@ -654,9 +588,94 @@
             if (e.code === "Space") { e.preventDefault(); attack(); }
         });
         document.addEventListener("keyup", e => { keys[e.key] = false; });
-        document.addEventListener("touchend", () => {
-            moveUp = moveDown = moveLeft = moveRight = false;
+
+        // Smooth analog joystick
+        const joystick = document.getElementById("joystick");
+        const joystickKnob = document.getElementById("joystickKnob");
+        const attackButton = document.getElementById("attackButton");
+        const weaponButton = document.getElementById("weaponButton");
+        let joystickPointerId = null;
+
+        function setJoystickFromPointer(clientX, clientY) {
+            const rect = joystick.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const maxRadius = rect.width * 0.29;
+
+            let dx = clientX - cx;
+            let dy = clientY - cy;
+            const distance = Math.hypot(dx, dy);
+
+            if (distance > maxRadius) {
+                const scale = maxRadius / distance;
+                dx *= scale;
+                dy *= scale;
+            }
+
+            joystickX = dx / maxRadius;
+            joystickY = dy / maxRadius;
+
+            // Dead zone prevents tiny accidental movement.
+            const magnitude = Math.hypot(joystickX, joystickY);
+            if (magnitude < 0.10) {
+                joystickX = 0;
+                joystickY = 0;
+            }
+
+            joystickKnob.style.transition = "none";
+            joystickKnob.style.transform =
+                `translate3d(${dx}px, ${dy}px, 0)`;
+        }
+
+        function resetJoystick() {
+            joystickPointerId = null;
+            joystickX = 0;
+            joystickY = 0;
+            joystickKnob.style.transition = "transform .12s ease-out";
+            joystickKnob.style.transform = "translate3d(0,0,0)";
+        }
+
+        joystick.addEventListener("pointerdown", e => {
+            e.preventDefault();
+            joystickPointerId = e.pointerId;
+            joystick.setPointerCapture(e.pointerId);
+            setJoystickFromPointer(e.clientX, e.clientY);
         });
+
+        joystick.addEventListener("pointermove", e => {
+            if (e.pointerId !== joystickPointerId) return;
+            e.preventDefault();
+            setJoystickFromPointer(e.clientX, e.clientY);
+        });
+
+        joystick.addEventListener("pointerup", e => {
+            if (e.pointerId === joystickPointerId) resetJoystick();
+        });
+
+        joystick.addEventListener("pointercancel", e => {
+            if (e.pointerId === joystickPointerId) resetJoystick();
+        });
+
+        joystick.addEventListener("lostpointercapture", resetJoystick);
+
+        attackButton.addEventListener("pointerdown", e => {
+            e.preventDefault();
+            attack();
+        });
+
+        weaponButton.addEventListener("pointerdown", e => {
+            e.preventDefault();
+            cycleWeapon();
+        });
+
+        // Stop the browser from scrolling/zooming while using game controls.
+        document.addEventListener("touchmove", e => {
+            if (e.target.closest(".joystick") || e.target.closest("#attackButton") || e.target.closest("#weaponButton")) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        window.addEventListener("blur", resetJoystick);
     </script>
 </body>
 </html>
